@@ -2,6 +2,7 @@ class CreateLodgings < ActiveRecord::Migration[5.1]
   def change
     create_table :lodgings do |t|
       t.integer :trip_id
+      t.string :lodging_name
       t.float :longitude
       t.float :latitude
       t.date :checkin_date

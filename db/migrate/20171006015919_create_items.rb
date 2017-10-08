@@ -2,7 +2,9 @@ class CreateItems < ActiveRecord::Migration[5.1]
   def change
     create_table :items do |t|
       t.integer :board_id
-      t.text :text
+      t.string :item_type
+      t.text :notes
+      t.time :time
       t.float :longitude
       t.float :latitude
       t.string :image_url

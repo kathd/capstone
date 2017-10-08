@@ -17,14 +17,16 @@ ActiveRecord::Schema.define(version: 20171006015919) do
 
   create_table "boards", force: :cascade do |t|
     t.integer "trip_id"
-    t.string "title"
+    t.string "board_title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "items", force: :cascade do |t|
     t.integer "board_id"
-    t.text "text"
+    t.string "item_type"
+    t.text "notes"
+    t.time "time"
     t.float "longitude"
     t.float "latitude"
     t.string "image_url"
@@ -35,6 +37,7 @@ ActiveRecord::Schema.define(version: 20171006015919) do
 
   create_table "lodgings", force: :cascade do |t|
     t.integer "trip_id"
+    t.string "lodging_name"
     t.float "longitude"
     t.float "latitude"
     t.date "checkin_date"
@@ -47,7 +50,7 @@ ActiveRecord::Schema.define(version: 20171006015919) do
 
   create_table "transportations", force: :cascade do |t|
     t.integer "trip_id"
-    t.string "type"
+    t.string "transpo_type"
     t.string "name"
     t.date "depart_date"
     t.date "arrive_date"
@@ -61,7 +64,7 @@ ActiveRecord::Schema.define(version: 20171006015919) do
 
   create_table "trips", force: :cascade do |t|
     t.integer "user_id"
-    t.string "title"
+    t.string "trip_title"
     t.float "longitude"
     t.float "latitude"
     t.date "start_date"
@@ -76,7 +79,6 @@ ActiveRecord::Schema.define(version: 20171006015919) do
     t.string "password_digest"
     t.string "first_name"
     t.string "last_name"
-    t.string "birthdate"
     t.string "image_url"
     t.text "bio"
     t.datetime "created_at", null: false
