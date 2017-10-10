@@ -1,0 +1,21 @@
+<h3>Edit <%= @trip.trip_title %> Trip</h3>
+
+<%= form_tag "/trips/#{@trip.id}", method: :patch do  %>
+  <div>
+    Trip Title: <input type="text" name="trip_title" value="<%= @trip.trip_title %>">
+  </div>
+  <!-- <div>
+    Location: <input type="text" name="address" value="<%= %>">
+  </div> -->
+  <div>
+    From: <input type="date" name="start_date" value="<%= @trip.start_date %>">
+  </div>
+  <div>
+    To: <input type="date" name="end_date" value="<%= @trip.end_date %>">
+  </div>
+  <input type="submit" value="Save">
+<% end %>
+
+<!-- DON'T FORGET to add CANCEL button which redirects to Trips Index -->
+<!-- work on LOCATION -->
+

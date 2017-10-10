@@ -1,0 +1,14 @@
+<h3>Trips</h3>
+
+<a href="/trips/new">Add Trip</a>
+
+<br><br>
+
+<% @trips.each do |trip| %>
+  <a href="/trips/<%= trip.id %>">
+    <h4><%= trip.trip_title %></h4>
+     <!-- ADD TRIP LOCATION HERE -->
+    <p><%= trip.start_date %> - <%= trip.end_date %></p>
+  </a>
+  <br>
+<% end %>

@@ -1,0 +1,15 @@
+<h3><%= @trip.trip_title %></h3>
+<!-- insert location here -->
+<p><%= @trip.start_date %> - <%= @trip.end_date %></p>
+<a href="/trips/<%= @trip.id %>/edit">Edit Trip</a>
+
+<!-- ADD DELETE LINK -->
+
+<% @boards.each do |board| %>
+  <div>
+    <%= board.board_title %>
+  </div>
+<% end %>
+
+<!-- How do I show the items of each board? -->
+<!-- Do I have to code it here or on another page? -->

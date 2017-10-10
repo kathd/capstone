@@ -7,7 +7,7 @@ end
 
 
 gem 'faker'
-
+gem 'geocoder'
 gem 'bootstrap', '~> 4.0.0.beta'
 
 # gem 'jquery‐rails'
