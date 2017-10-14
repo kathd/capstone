@@ -1,14 +1,59 @@
 <h3>Trips</h3>
 
-<a href="/trips/new">Add Trip</a>
+<!-- <a href="/trips/new">Add Trip</a> -->
+
+
+<!-- ADD TRIP MODAL -->
+  <!-- MODAL TRIGGER -->
+  <button class="btn btn-primary" 
+    data-toggle="modal"
+    data-target="#addTripModal">Add Trip</button>
+  
+  <!-- MODAL CONTENT -->
+  <div class="modal fade" id="addTripModal" tabindex="-1" role="dialog" aria-labelledby="addTripModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Add Trip</h4>
+          <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        </div>
+        <%= form_tag "/trips", method: :post do  %>
+          <div class="modal-body">
+            <div>
+              Trip Title: <input type="text" name="trip_title">
+            </div>
+            <!-- <div>
+              Location: <input type="text" name="address">
+            </div> -->
+            <div>
+              From: <input type="date" name="start_date">
+            </div>
+            <div>
+              To: <input type="date" name="end_date">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Add Trip</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
 <br><br>
 
-<% @trips.each do |trip| %>
-  <a href="/trips/<%= trip.id %>">
-    <h4><%= trip.trip_title %></h4>
-     <!-- ADD TRIP LOCATION HERE -->
-    <p><%= trip.start_date %> - <%= trip.end_date %></p>
-  </a>
-  <br>
-<% end %>
+<!-- TRIPS LIST -->
+  <% @trips.each do |trip| %>
+    <a href="/trips/<%= trip.id %>">
+      <h4><%= trip.trip_title %></h4>
+       <!-- ADD TRIP LOCATION HERE -->
+      <p><%= trip.start_date %> - <%= trip.end_date %></p>
+    </a>
+    <br>
+  <% end %>
+
+
+
+
+

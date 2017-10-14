@@ -3,18 +3,12 @@ class TripsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if current_user
-      @trips = current_user.trips
-      render :index
-    else
-      flash[:warning] = "Please log in."
-      redirect_to "/login"
-    end
+    @trips = current_user.trips
+    render :index
   end
 
   def show
-    @trip = current_user.trips.find(params[:id])
-    @boards = @trip.boards
+    @trip = current_user.trips.find_by(id: params[:id])
   end
 
   def new
@@ -24,38 +18,41 @@ class TripsController < ApplicationController
   def create
     coordinates = Geocoder.coordinates(params[:address])
     @trip = Trip.create(
-      trip_title: params[:trip_title],
-      latitude: coordinates[0],
-      longitude: coordinates[1],
-      start_date: params[:start_date],
-      end_date: params[:end_date]
-      )
-    flash[:success] = "Trip Created"
-    redirect_to "/trips/#{@trip.id}"
-  end
-
-  def edit
-    @trip = Trip.find_by(id: params[:id])
-  end
-
-  def update
-    # coordinates = Geocoder.coordinates(params[:address])
-    trip = Trip.find_by(id: params[:id])
-    trip = Trip.update(
+      user_id: current_user.id,
       trip_title: params[:trip_title],
       # latitude: coordinates[0],
       # longitude: coordinates[1],
       start_date: params[:start_date],
       end_date: params[:end_date]
       )
-    flash[:success] = "Trip Updated"
+    # flash[:success] = "Trip Created"
+    redirect_to "/trips/#{@trip.id}"
+  end
+
+  def edit
+    @trips = current_user.trips
+    @trip = @trips.find_by(id: params[:id])
+  end
+
+  def update
+    # coordinates = Geocoder.coordinates(params[:address])
+    trips = current_user.trips
+    trip = trips.find_by(id: params[:id])
+    trip.update(
+      trip_title: params[:trip_title],
+      # latitude: coordinates[0],
+      # longitude: coordinates[1],
+      start_date: params[:start_date],
+      end_date: params[:end_date]
+      )
+    # flash[:success] = "Trip Updated"
     redirect_to "/trips/#{trip.id}"
   end
 
   def destroy
     @trip = Trip.find_by(id: params[:id])
     @trip.destroy
-    flash[:warning] = "Product Destroyed"
+    # flash[:warning] = "Trip Deleted"
     redirect_to "/trips"
   end
 
