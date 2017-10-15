@@ -10,7 +10,7 @@
     data-toggle="modal"
     data-target="#editTripModal">Edit Trip</a>
   
-  <!-- MODAL CONTENT -->
+  <!-- EDIT TRIP MODAL CONTENT -->
   <div class="modal fade" id="editTripModal" tabindex="-1" role="dialog" aria-labelledby="addTripModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -38,7 +38,7 @@
     data-toggle="modal"
     data-target="#addBoardModal">Add Board</button>
   
-  <!-- MODAL CONTENT -->
+  <!-- ADD BOARD MODAL CONTENT -->
   <div class="modal fade" id="addBoardModal" tabindex="-1" role="dialog" aria-labelledby="addBoardModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -46,10 +46,10 @@
           <h4 class="modal-title" id="myModalLabel">Add Board</h4>
           <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
         </div>
-        <%= form_tag "/trips/#{@trip.id}", method: :post do  %>
+        <%= form_tag "/trips/#{@trip.id}/boards", method: :post do  %>
           <div class="modal-body">
             <div>
-              Board Title: <input type="text" name="board_title">
+              <%= render partial: "../boards/board_form", locals: {board: @board}%>
             </div>
           </div>
           <div class="modal-footer">
@@ -71,7 +71,7 @@
       <!-- EDIT BOARD MODAL -->
       <!-- MODAL TRIGGER -->
       <button class="btn btn-link" data-toggle="modal" data-target="#editBoardModal">Edit</button>      
-      <!-- MODAL CONTENT -->
+      <!-- EDIT BOARD MODAL CONTENT -->
       <div class="modal fade" id="editBoardModal" tabindex="-1" role="dialog" aria-labelledby="editBoardModal" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -79,10 +79,10 @@
               <h4 class="modal-title" id="myModalLabel">Edit Board</h4>
               <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
             </div>
-            <%= form_tag "/trips/#{@trip.id}", method: :patch do  %>
+            <%= form_tag "/trips/#{@trip.id}/boards/#{board.id}", method: :patch do  %>
               <div class="modal-body">
                 <div>
-                  Board Title: <input type="text" name="board_title" value="<%= board.board_title %>">
+                  <%= render partial: "../boards/board_form", locals: {board: board} %>
                 </div>
               </div>
               <div class="modal-footer">
