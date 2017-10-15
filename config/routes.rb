@@ -10,14 +10,11 @@ Rails.application.routes.draw do
   get "/logout" => "sessions#destroy"
 
   #trips
-  get "/trips" => "trips#index"
-  post "/trips" => "trips#create"
-  get "/trips/:id" => "trips#show"
-  patch "/trips/:id" => "trips#update"
-  delete "/trips/:id" => "trips#destroy"
+  resources :trips
 
   #boards
-  post "/trips/:id" => "boards#create"
-  patch "/trips/:id/boards/:board_id" => "boards#update"
+  post "/trips/:trip_id/boards" => "boards#create"
+  patch "/trips/:trip_id/boards/:id" => "boards#update"
+  delete "/trips/:trip_id/boards/:id" => "boards#destroy"
 
 end
