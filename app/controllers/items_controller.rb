@@ -1,9 +1,7 @@
 class ItemsController < ApplicationController
 
   def show
-    @trip = current_user.trips.find(params[:trip_id])
-    @board = @trip.boards.find(params[:board_id])
-    @item = @board.items.find(params[:item_id])
+    app_item # from ApplicationController, delete if not working
   end
 
   def new
@@ -11,8 +9,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @trip = current_user.trips.find(params[:trip_id])
-    @board = @trip.boards.find(params[:board_id])
+    app_board
     @item = Item.create(
       board_id: @board.id,
       item_type: params[:item_type],
@@ -27,10 +24,8 @@ class ItemsController < ApplicationController
   end
 
   def update
-    trip = current_user.trips.find(params[:trip_id])
-    board = trip.boards.find(params[:board_id])
-    item = board.items.find(params[:item_id])
-    item.update(
+    app_item
+    @item.update(
       board_id: @board.id,
       item_type: params[:item_type],
       notes: params[:notes],

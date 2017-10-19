@@ -7,7 +7,7 @@ class BoardsController < ApplicationController
   end
 
   def create
-    @trip = current_user.trips.find(params[:trip_id])
+    app_trip
     @board = Board.create(
       trip_id: @trip.id,
       board_title: params[:board_title]
@@ -21,18 +21,16 @@ class BoardsController < ApplicationController
   end
 
   def update
-    trip = current_user.trips.find(params[:trip_id])
-    board = trip.boards.find(params[:board_id])
-    board.update(
+    app_board
+    @board.update(
       board_title: params[:board_title]
       )
     flash[:success] = "Board Updated"
-    redirect_to "/trips/#{trip.id}"
+    redirect_to "/trips/#{@trip.id}"
   end
 
   def destroy
-    @trip = current_user.trips.find(params[:trip_id])
-    @board = @trip.boards.find(params[:board_id])
+    app_board
     @board.destroy
     # flash[:warning] = "Board Deleted"
     redirect_to "/trips/#{@trip.id}"

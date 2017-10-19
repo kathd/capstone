@@ -11,5 +11,17 @@ class ApplicationController < ActionController::Base
     redirect_to "/login" unless current_user
   end
 
+  def app_trip
+    @trip = current_user.trips.find(params[:trip_id])
+  end
+
+  def app_board
+    @board = app_trip.boards.find(params[:board_id])
+    
+  end
+
+  def app_item
+    @item = app_board.items.find(params[:item_id])
+  end
 
 end
