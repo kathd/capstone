@@ -9,6 +9,7 @@ end
 gem 'faker'
 gem 'geocoder'
 gem 'bootstrap', '~> 4.0.0.beta'
+# gem 'webpacker', '~> 3.0'
 
 # gem 'jquery‐rails'
 

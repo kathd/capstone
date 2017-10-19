@@ -16,7 +16,7 @@ class TripsController < ApplicationController
   end
 
   def create
-    coordinates = Geocoder.coordinates(params[:address])
+    # coordinates = Geocoder.coordinates(params[:address])
     @trip = Trip.create(
       user_id: current_user.id,
       trip_title: params[:trip_title],
