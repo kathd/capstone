@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   #signup
   get "/signup" => "users#new"
   post "/users" => "users#create"
-  delete "/users/:id" => "users#destroy"
+  patch "/users/:user_id" => "boards#update"
+  delete "/users/:user_id" => "users#destroy"
 
   #login & logout
   get "/login" => "sessions#new"

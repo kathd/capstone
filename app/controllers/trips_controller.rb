@@ -4,6 +4,7 @@ class TripsController < ApplicationController
 
   def index
     @trips = current_user.trips.order(:start_date)
+    @trip = @trips.find_by(id: params[:id])
     render :index
   end
 

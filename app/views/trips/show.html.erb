@@ -13,9 +13,15 @@
   <a href="/trips/#{@trip.id}/edit" class="btn btn-primary" 
     data-toggle="modal"
     data-target="#editTripModal">Edit Trip</a>
+
+<!-- ADD BOARD MODAL ** THIS WORKS ** -->
+  <!-- MODAL TRIGGER -->
+  <button class="btn btn-primary" 
+    data-toggle="modal"
+    data-target="#addBoardModal">Add Board</button>
   
 <!-- EDIT TRIP MODAL CONTENT --> 
-  <div class="modal fade" id="editTripModal" tabindex="-1" role="dialog" aria-labelledby="addTripModal" aria-hidden="true">
+  <div class="modal fade" id="editTripModal" tabindex="-1" role="dialog" aria-labelledby="editTripModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -35,12 +41,6 @@
       </div>
     </div>
   </div>
-
-<!-- ADD BOARD MODAL ** THIS WORKS ** -->
-  <!-- MODAL TRIGGER -->
-  <button class="btn btn-primary" 
-    data-toggle="modal"
-    data-target="#addBoardModal">Add Board</button>
   
 <!-- ADD BOARD MODAL CONTENT -->
   <div class="modal fade" id="addBoardModal" tabindex="-1" role="dialog" aria-labelledby="addBoardModal" aria-hidden="true">
@@ -76,14 +76,15 @@
     </div>
 <!-- BOARD OPTIONS -->
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Options
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
         <button class="dropdown-item" type="button" data-toggle="modal" data-target="#editBoard<%=board.id%>">Edit Board</button>
         <button class="dropdown-item" type="button" data-toggle="modal" data-target="#addItem<%=board.id%>">Add Item</button>
-        <button class="dropdown-item" type="button">Archive</button>
-        <button class="dropdown-item" type="button">Delete</button>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item" type="button">Archive</button> <!-- TODO: Archive Board -->
+        <button href="/trips/#{@trip.id}/boards/#{board.id}" class="dropdown-item" type="button" data-method="delete" >Delete</button> <!-- TODO: Delete Board -->
       </div>
     </div>
 
@@ -136,10 +137,11 @@
 <!-- ITEMS LIST -->
       <% board.items.each do |item| %>
         <div class="btn btn-link" data-toggle="modal" data-target="showItem<%=item.id%>">
-          <%= item.item_type %> | <%= item.notes %>
+          <%= item.description %> | <%= item.item_type %>
         </div><br> <!-- TODO: show only a few characters of the notes--> 
 
 <!-- TODO: SHOW ITEM MODAL CONTENT -->
+
 <!-- ADD ITEM MODAL CONTENT -->
       <div class="modal fade" id="showItem<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="showItem<%=item.id%>" aria-hidden="true">
         <div class="modal-dialog">
@@ -150,7 +152,7 @@
             </div>
             <div class="modal-body">
               <div>
-              <%= item.notes %>
+              <%= item.description %>
               </div>
             </div>
               <div class="modal-footer">

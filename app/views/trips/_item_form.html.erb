@@ -1,14 +1,24 @@
 <div>
+  <div class="form-check form-check-inline">
+  <label class="form-check-label">
+    <input class="form-check-input" type="radio" name="item_type" id="inlineRadio1" value="Food / Drink"> Food / Drink
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <label class="form-check-label">
+    <input class="form-check-input" type="radio" name="item_type" id="inlineRadio2" value="Activity"> Activity
+  </label>
+</div>
+
   <div>
-    <input type="radio" name="item_type" value="Activity" id="activity"> Activity  
-    <br>
-    <input type="radio" name="item_type" value="Food / Drink" id="food_drink"> Food / Drink
+    Description:<br>
+    <textarea name="description"></textarea>
   </div>
+  
   <div>
-    Notes:<br>
-    <textarea name="notes" ></textarea>
+    Time: <input type="time" name="time">
+  <!-- Location: <input type="text" name="location"> -->
+    Price: <input type="number" min="0.00" max="999999.99" step="any" name="price">
   </div>
-  Time: <input type="time" name="time">
-  Notes: <input type="text" name="notes">
 
 </div>

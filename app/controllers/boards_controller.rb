@@ -7,7 +7,7 @@ class BoardsController < ApplicationController
   end
 
   def create
-    app_trip
+    app_trip # from ApplicationController
     @board = Board.create(
       trip_id: @trip.id,
       board_title: params[:board_title]
@@ -21,16 +21,16 @@ class BoardsController < ApplicationController
   end
 
   def update
-    app_board
+    app_board # from ApplicationController
     @board.update(
       board_title: params[:board_title]
       )
-    flash[:success] = "Board Updated"
+    # flash[:success] = "Board Updated"
     redirect_to "/trips/#{@trip.id}"
   end
 
   def destroy
-    app_board
+    app_board # from ApplicationController
     @board.destroy
     # flash[:warning] = "Board Deleted"
     redirect_to "/trips/#{@trip.id}"

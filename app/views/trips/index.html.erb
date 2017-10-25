@@ -1,15 +1,38 @@
 <h3>Trips</h3>
 
-<!-- <a href="/trips/new">Add Trip</a> -->
-
-
 <!-- ADD TRIP MODAL -->
   <!-- MODAL TRIGGER -->
   <button class="btn btn-primary"
     data-toggle="modal"
     data-target="#addTripModal">Add Trip</button>
-  
-  <!-- MODAL CONTENT -->
+
+<br><br>
+
+<!-- TRIPS LIST -->
+  <% @trips.each do |trip| %>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title"><%= trip.trip_title %></h4>
+            <p class="card-text">
+              <!-- ADD TRIP LOCATION HERE -->
+              <% if trip.start_date && trip.end_date %>
+                <p><%= trip.start_date.strftime("%B %d, %Y") %> - <%= trip.end_date.strftime("%B %d, %Y")  %></p>
+              <% else %>
+                <% nil %>
+              <% end %>
+            </p>
+            <a href="/trips/<%= trip.id %>" class="btn btn-primary">View Trip</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+
+<!-- MODAL CONTENT -->
   <div class="modal fade" id="addTripModal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -19,7 +42,7 @@
         </div>
         <%= form_tag "/trips", method: :post do  %>
           <div class="modal-body">
-            <%= render partial: "trip_form"%>
+            <%= render partial: "trip_form" %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -29,23 +52,6 @@
       </div>
     </div>
   </div>
-
-<br><br>
-
-<!-- TRIPS LIST -->
-  <% @trips.each do |trip| %>
-    <a href="/trips/<%= trip.id %>">
-      <h4><%= trip.trip_title %></h4>
-      <!-- ADD TRIP LOCATION HERE -->
-      <% if trip.start_date && trip.end_date %>
-        <p><%= trip.start_date.strftime("%B %d, %Y") %> - <%= trip.end_date.strftime("%B %d, %Y")  %></p>
-      <% else %>
-        <% nil %>
-      <% end %>
-    </a>
-    <br>
-  <% end %>
-
 
 
 
