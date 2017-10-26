@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   #signup
   get "/signup" => "users#new"
   post "/users" => "users#create"
-  patch "/users/:user_id" => "boards#update"
+  patch "/users/:user_id" => "users#update"
   delete "/users/:user_id" => "users#destroy"
 
   #login & logout
@@ -14,20 +14,16 @@ Rails.application.routes.draw do
   resources :trips
 
   #lodging
-  resources :lodgings
-  # get "/trips/:trip_id/lodgings" => "lodgings#index"
-  # get "/trips/:trip_id/lodgings/:lodging_id" => "lodgings#show"
-  # post "/trips/:trip_id/lodgings" => "lodgings#create"
-  # patch "/trips/:trip_id/lodgings/:lodging_id" => "lodgings#update"
-  # delete "/trips/:trip_id/lodgings/:lodging_id" => "lodgings#destroy"
+  get "/trips/:trip_id/lodgings/:lodging_id" => "lodgings#show"
+  post "/trips/:trip_id/lodgings" => "lodgings#create"
+  patch "/trips/:trip_id/lodgings/:lodging_id" => "lodgings#update"
+  delete "/trips/:trip_id/lodgings/:lodging_id" => "lodgings#destroy"
 
   #transportation
-  resources :transportations
-  # get "/trips/:trip_id/transportations" => "transportations#index"
-  # get "/trips/:trip_id/transportations/:transportation_id" => "transportations#show"
-  # post "/trips/:trip_id/transportations" => "transportations#create"
-  # patch "/trips/:trip_id/transportations/:transportation_id" => "transportations#update"
-  # delete "/trips/:trip_id/transportations/:transportation_id" => "transportations#destroy"
+  get "/trips/:trip_id/transportations/:transportation_id" => "transportations#show"
+  post "/trips/:trip_id/transportations" => "transportations#create"
+  patch "/trips/:trip_id/transportations/:transportation_id" => "transportations#update"
+  delete "/trips/:trip_id/transportations/:transportation_id" => "transportations#destroy"
 
   #boards
   post "/trips/:trip_id/boards" => "boards#create"

@@ -19,6 +19,18 @@
   <button class="btn btn-primary" 
     data-toggle="modal"
     data-target="#addBoardModal">Add Board</button>
+
+<!-- ADD LODGING MODAL -->
+  <!-- MODAL TRIGGER -->
+  <button class="btn btn-primary" 
+    data-toggle="modal"
+    data-target="#addLodgingModal">Add Lodging</button>
+
+<!-- ADD TRANSPORTATION MODAL -->
+  <!-- MODAL TRIGGER -->
+  <button class="btn btn-primary" 
+    data-toggle="modal"
+    data-target="#addTransportationModal">Add Transportation</button>
   
 <!-- EDIT TRIP MODAL CONTENT --> 
   <div class="modal fade" id="editTripModal" tabindex="-1" role="dialog" aria-labelledby="editTripModal" aria-hidden="true">
@@ -64,6 +76,95 @@
       </div>
     </div>
   </div>
+
+<!-- ADD LODGING MODAL CONTENT -->
+  <div class="modal fade" id="addLodgingModal" tabindex="-1" role="dialog" aria-labelledby="addLodgingModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Add Board</h4>
+          <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        </div>
+        <%= form_tag "/trips/#{@trip.id}/lodgings", method: :post do  %>
+          <div class="modal-body">
+            <div>
+              Name:<br>
+              <input type="text" name="lodging_name"><br>
+            </div>
+            <div>
+              Check In:<br>
+              <input type="date" name="checkin_date"><br>
+            </div>
+            <div>
+              Check Out:<br>
+              <input type="date" name="checkout_date"><br>
+            </div>
+            <div>
+              Notes:<br>
+              <textarea name="notes"></textarea>
+            </div>
+            <div>
+              Price: <input type="number" min="0.00" max="999999.99" step="any" name="price">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Add Board</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+<!-- ADD TRANSPORTATION MODAL CONTENT -->
+  <div class="modal fade" id="addTransportationModal" tabindex="-1" role="dialog" aria-labelledby="addTransportationModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Add Board</h4>
+          <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        </div>
+        <%= form_tag "/trips/#{@trip.id}/transportations", method: :post do  %>
+          <div class="modal-body">
+            <div>
+              Name:<br>
+              <input type="text" name="transpo_name"><br>
+            </div>
+            <div>
+              Depart Date:
+              <input type="date" name="depart_date">
+            </div>
+            <div>
+              Depart Time:
+              <input type="time" name="depart_time"><br>
+            </div>
+            <div>
+              Arrival Date:
+              <input type="date" name="arrive_date">
+            </div>
+            <div>
+              Arrival Time:
+              <input type="time" name="arrive_time"><br>
+            </div>
+            <div>
+              Notes:<br>
+              <textarea name="notes"></textarea><br>
+            </div>
+            <div>
+              Price: <input type="number" min="0.00" max="999999.99" step="any" name="price">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Add Board</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<!-- LODGING LIST -->
 
 
 
@@ -136,13 +237,12 @@
 
 <!-- ITEMS LIST -->
       <% board.items.each do |item| %>
-        <div class="btn btn-link" data-toggle="modal" data-target="showItem<%=item.id%>">
+        <div class="btn btn-link" data-toggle="modal" data-target="#showItem<%=item.id%>">
           <%= item.description %> | <%= item.item_type %>
         </div><br> <!-- TODO: show only a few characters of the notes--> 
 
 <!-- TODO: SHOW ITEM MODAL CONTENT -->
-
-<!-- ADD ITEM MODAL CONTENT -->
+<!-- SHOW ITEM MODAL CONTENT -->
       <div class="modal fade" id="showItem<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="showItem<%=item.id%>" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
