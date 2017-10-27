@@ -10,27 +10,23 @@
 
 <!-- TRIPS LIST -->
   <% @trips.each do |trip| %>
+    <!-- ADD TRIP LOCATION HERE -->
     <div class="row">
       <div class="col-sm-4">
         <div class="card">
           <div class="card-body">
             <h4 class="card-title"><%= trip.trip_title %></h4>
-            <p class="card-text">
-              <!-- ADD TRIP LOCATION HERE -->
-              <% if trip.start_date && trip.end_date %>
-                <p><%= trip.start_date.strftime("%B %d, %Y") %> - <%= trip.end_date.strftime("%B %d, %Y")  %></p>
-              <% else %>
-                <% nil %>
-              <% end %>
-            </p>
+            <% if trip.start_date && trip.end_date %>
+              <p class="card-text"><%= trip.start_date.strftime("%B %d, %Y") %> - <%= trip.end_date.strftime("%B %d, %Y")  %></p>
+            <% else %>
+              <% nil %>
+            <% end %>
             <a href="/trips/<%= trip.id %>" class="btn btn-primary">View Trip</a>
-
           </div>
         </div>
       </div>
     </div>
   <% end %>
-
 
 <!-- MODAL CONTENT -->
   <div class="modal fade" id="addTripModal" tabindex="-1" role="dialog">

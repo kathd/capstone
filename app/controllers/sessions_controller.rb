@@ -1,9 +1,5 @@
 class SessionsController < ApplicationController
 
-  def new
-    render 'new.html.erb'
-  end
-
   def create
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
@@ -19,7 +15,7 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     flash[:success] = 'Successfully logged out!'
-    redirect_to '/login'
+    redirect_to '/'
   end
 
 end

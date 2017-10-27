@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
+  
+  root to: "pages#index"
+
   #signup
-  get "/signup" => "users#new"
   post "/users" => "users#create"
   patch "/users/:user_id" => "users#update"
   delete "/users/:user_id" => "users#destroy"
 
   #login & logout
-  get "/login" => "sessions#new"
   post "/login" => "sessions#create"
   get "/logout" => "sessions#destroy"
 

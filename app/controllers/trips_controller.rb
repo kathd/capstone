@@ -26,7 +26,7 @@ class TripsController < ApplicationController
       start_date: params[:start_date],
       end_date: params[:end_date]
       )
-    # flash[:success] = "Trip Created"
+    flash[:success] = "Trip Created"
     redirect_to "/trips/#{@trip.id}"
   end
 
@@ -46,14 +46,14 @@ class TripsController < ApplicationController
       start_date: params[:start_date],
       end_date: params[:end_date]
       )
-    # flash[:success] = "Trip Updated"
+    flash[:success] = "Trip Updated"
     redirect_to "/trips/#{trip.id}"
   end
 
   def destroy
     @trip = Trip.find_by(id: params[:id])
     @trip.destroy
-    # flash[:warning] = "Trip Deleted"
+    flash[:warning] = "Trip Deleted"
     redirect_to "/trips"
   end
 
