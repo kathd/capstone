@@ -101,16 +101,20 @@
                 <%= form_tag '/users', method: :post do  %>
                   <div class="modal-body">
                     <div>
-                      Username: <input type="text" name="username">
+                      <label>Username</label>
+                      <input type="text" class="form-control" name="username">
                     </div>
                     <div>
-                      Email: <input type="email" name="email">
+                      <label>Email</label>
+                      <input type="email" class="form-control" name="email">
                     </div>
                     <div>
-                      Password: <input type="password" name="password">
+                      <label>Password</label>
+                      <input type="password" class="form-control" name="password">
                     </div>
                     <div>
-                      Confirm Password: <input type="password" name="password_confirmation">
+                      <label>Confirm Password</label>
+                      <input type="password" class="form-control" name="password_confirmation">
                     </div>
                   </div>
                   <div class="modal-footer">
