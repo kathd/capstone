@@ -38,7 +38,10 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    
+    app_item
+    @item.destroy
+    flash[:warning] = "Item Deleted"
+    redirect_to "/trips/#{@trip.id}"
   end
   
 end

@@ -65,7 +65,8 @@
         <%= form_tag "/trips/#{@trip.id}/boards", method: :post do  %>
           <div class="modal-body">
             <div>
-              Board Title: <input type="text" name="board_title">
+              <label for="board_title">Board Title</label>
+              <input type="text" class="form-control" id="board_title" name="board_title" placeholder="First Day in NYC, Food List, Etc.">
             </div>
           </div>
           <div class="modal-footer">
@@ -186,6 +187,7 @@
         <div class="dropdown-divider"></div>
         <button class="dropdown-item" type="button">Archive</button> <!-- TODO: Archive Board -->
         <button href="/trips/#{@trip.id}/boards/#{board.id}" class="dropdown-item" type="button" data-method="delete" >Delete</button> <!-- TODO: Delete Board -->
+        <%= button_to "Delete", "/trips/#{@trip.id}/boards/#{board.id}", method: :delete, class: "dropdown-item", data: { confirm: 'Are you sure?' } %> 
       </div>
     </div>
 
@@ -200,7 +202,8 @@
             <%= form_tag "/trips/#{@trip.id}/boards/#{board.id}", method: :patch do  %>
               <div class="modal-body">
                 <div>
-                  Board Title: <input type="text" name="board_title" value="<%= board.board_title %>">
+                  <label for="board_title">Board Title</label>
+                  <input type="text" class="form-control" id="board_title" name="board_title" value="<%= board.board_title %>">
                 </div>
               </div>
               <div class="modal-footer">
