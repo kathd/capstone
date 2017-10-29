@@ -1,42 +1,45 @@
-<h3><%= @trip.trip_title %></h3>
-<!-- insert location here -->
-<% if @trip.start_date && @trip.end_date %>
-  <p><%= @trip.start_date.strftime("%B %d, %Y") %> - <%= @trip.end_date.strftime("%B %d, %Y") %></p>
-<% else %>
-  <% nil %>
-<% end %>
+<!-- TRIP INFO -->
+<div id="trip-info">
+  <h3><%= @trip.trip_title %></h3>
+  <!-- TODO: insert location here -->
+  <% if @trip.start_date && @trip.end_date %>
+    <p><%= @trip.start_date.strftime("%B %d, %Y") %> - <%= @trip.end_date.strftime("%B %d, %Y") %></p>
+  <% else %>
+    <% nil %>
+  <% end %>
 
-<!-- TRIP OPTIONS: EDIT / DELETE -->
-<div class="dropdown">
-  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="tripDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Options
-  </button>
-  <div class="dropdown-menu" aria-labelledby="tripDropdownMenu">
-    <button class="dropdown-item" type="button" data-toggle="modal" data-target="#editTripModal">Edit Trip</button>
-    <div class="dropdown-divider"></div>
-    <%= button_to "Delete", "/trips/#{@trip.id}", method: :delete, class: "dropdown-item", data: { confirm: 'Are you sure?' } %>
+  <!-- TRIP OPTIONS: EDIT / DELETE -->
+  <div class="dropdown">
+    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="tripDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+    <div class="dropdown-menu" aria-labelledby="tripDropdownMenu">
+      <button class="dropdown-item" type="button" data-toggle="modal" data-target="#editTripModal">Edit Trip</button>
+      <div class="dropdown-divider"></div>
+      <%= button_to "Delete", "/trips/#{@trip.id}", method: :delete, class: "dropdown-item", data: { confirm: 'Are you sure?' } %>
+    </div>
   </div>
 </div>
 
-
-<!-- ADD BOARD MODAL ** THIS WORKS ** -->
+<!-- TRIP OPTIONS: TO ADD STUFF -->
+<div id="trip-add-options">
+  <!-- ADD BOARD MODAL -->
   <!-- MODAL TRIGGER -->
   <button class="btn btn-primary" 
     data-toggle="modal"
     data-target="#addBoardModal">Add Board</button>
 
-<!-- ADD LODGING MODAL -->
+  <!-- ADD LODGING MODAL -->
   <!-- MODAL TRIGGER -->
   <button class="btn btn-primary" 
     data-toggle="modal"
     data-target="#addLodgingModal">Add Lodging</button>
 
-<!-- ADD TRANSPORTATION MODAL -->
+  <!-- ADD TRANSPORTATION MODAL -->
   <!-- MODAL TRIGGER -->
   <button class="btn btn-primary" 
     data-toggle="modal"
     data-target="#addTransportationModal">Add Transportation</button>
-  
+</div>
+
 
 <!-- EDIT TRIP MODAL CONTENT --> 
   <div class="modal fade" id="editTripModal" tabindex="-1" role="dialog" aria-labelledby="editTripModal" aria-hidden="true">
@@ -44,11 +47,11 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel">Edit <%= @trip.trip_title %> Trip</h4>
-          <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
           <%= form_tag "/trips/#{@trip.id}", method: :patch do  %>
             <div class="modal-body">
-              <%= render partial: "trip_form", locals: {trip: @trip} %>
+              <%= render partial: "trip_form" %>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -66,14 +69,11 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel">Add Board</h4>
-          <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <%= form_tag "/trips/#{@trip.id}/boards", method: :post do  %>
           <div class="modal-body">
-            <div>
-              <label for="board_title">Board Title</label>
-              <input type="text" class="form-control" id="board_title" name="board_title" placeholder="First Day in NYC, Food List, Etc.">
-            </div>
+            <%= render partial: "board_form" %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -84,13 +84,13 @@
     </div>
   </div>
 
-<!-- ADD LODGING MODAL CONTENT ** TODO: DOES NOT WORK **-->
+<!-- ADD LODGING MODAL CONTENT -->
   <div class="modal fade" id="addLodgingModal" tabindex="-1" role="dialog" aria-labelledby="addLodgingModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel">Add Lodging</h4>
-          <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <%= form_tag "/trips/#{@trip.id}/lodgings", method: :post do  %>
           <div class="modal-body">
@@ -105,14 +105,13 @@
     </div>
   </div>
 
-
 <!-- ADD TRANSPORTATION MODAL CONTENT -->
   <div class="modal fade" id="addTransportationModal" tabindex="-1" role="dialog" aria-labelledby="addTransportationModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel">Add Transportation</h4>
-          <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <%= form_tag "/trips/#{@trip.id}/transportations", method: :post do  %>
           <div class="modal-body">
@@ -127,30 +126,58 @@
     </div>
   </div>
 
-<!-- LODGING LIST -->
-<% @trip.lodgings.each do |lodging| %>
-  
-  <% if lodging.checkin_date && lodging.checkout_date %>
-  <div>
-    <h5><%= lodging.lodging_name %> | <%= lodging.checkin_date.strftime("%B %d, %Y") %> - <%= lodging.checkout_date.strftime("%B %d, %Y") %></h5>
-  </div>
-  <% else %>
-    <h5><%= lodging.lodging_name %></h5>
+<!-- LODGING LIST - EACH -->
+<div id="lodging-list">
+  <% @trip.lodgings.each do |lodging| %>
+    
+    <div id="lodging-each" class="btn btn-link" data-toggle="modal" data-target="#showLodging<%=lodging.id%>">
+      <% if lodging.checkin_date && lodging.checkout_date %>
+        <p><%= lodging.lodging_name %> | <%= lodging.checkin_date.strftime("%B %d, %Y") %> - <%= lodging.checkout_date.strftime("%B %d, %Y") %></p>
+      <% else %>
+        <p><%= lodging.lodging_name %></p>
+      <% end %>
+    </div>
+
+<!-- SHOW EACH LODGING MODAL CONTENT -->
+    <div class="modal fade" id="showLodging<%=lodging.id%>" tabindex="-1" role="dialog" aria-labelledby="showLodging<%=lodging.id%>" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel"><%= lodging.lodging_name %></h4>
+            <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div>
+              <p>Checkin: <%= lodging.checkin_date %></p>
+              <p>Checkout: <%= lodging.checkin_date %></p>
+            </div>
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Edit Lodging</button>
+            </div>
+        </div>
+      </div>
+    </div>
+
   <% end %>
-<% end %>
+</div>
 
 
-<!-- TRANSPORTATION LIST -->
-<% @trip.transportations.each do |transportation| %>
-  <div>
-    <h5><%= transportation.transpo_name %></h5>
-  </div>
-<% end %>
+
+<!-- TRANSPORTATION LIST - EACH -->
+<div id="transpo-list">
+  <% @trip.transportations.each do |transportation| %>
+    <div id="transpo-each" class="btn btn-link" data-toggle="modal" data-target="">
+      <p><%= transportation.transpo_name %></p>
+    </div>
+  <% end %>
+</div>
 
 
 <!-- BOARDS LIST - EACH -->
 <% @trip.boards.each do |board| %>
-  <div>
+  <div id="board-each">
 <!-- BOARD HEADER -->
     <div class="board-header">
       <h5><%= board.board_title %></h5>
@@ -175,14 +202,11 @@
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title" id="myModalLabel">Edit <%= board.board_title %></h4>
-              <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
+              <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <%= form_tag "/trips/#{@trip.id}/boards/#{board.id}", method: :patch do  %>
               <div class="modal-body">
-                <div>
-                  <label for="board_title">Board Title</label>
-                  <input type="text" class="form-control" id="board_title" name="board_title" value="<%= board.board_title %>">
-                </div>
+                <%= render partial: "board_form" %> <!-- TODO: show values-->
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -199,7 +223,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title" id="myModalLabel">Add Item <%= board.board_title %></h4>
-              <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
+              <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <%= form_tag "/trips/#{@trip.id}/boards/#{board.id}/items", method: :post do  %>
               <div class="modal-body">
@@ -218,37 +242,36 @@
 
 <!-- ITEMS LIST -->
       <% board.items.each do |item| %>
-        <div class="btn btn-link" data-toggle="modal" data-target="#showItem<%=item.id%>">
+        <div id="item-each" class="btn btn-link" data-toggle="modal" data-target="#showItem<%=item.id%>">
           <%= item.description %> | <%= item.item_type %>
         </div><br> <!-- TODO: show only a few characters of the notes--> 
 
-<!-- TODO: SHOW ITEM MODAL CONTENT -->
 <!-- SHOW ITEM MODAL CONTENT -->
-      <div class="modal fade" id="showItem<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="showItem<%=item.id%>" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title" id="myModalLabel"><%= item.item_type %></h4>
-              <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
-            </div>
-            <div class="modal-body">
-              <div>
-              <%= item.description %>
+        <div class="modal fade" id="showItem<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="showItem<%=item.id%>" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel"><%= item.item_type %></h4>
+                <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               </div>
-            </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary">Add Item</button>
+              <div class="modal-body">
+                <div>
+                  <p><%= item.description %></p>
+                </div>
               </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Add Item</button>
+                </div>
+            </div>
           </div>
         </div>
-      </div>
 
 
       <% end %> <!-- END OF ITEM-->
   
-  </div> <!-- END OF BOARD --> 
+  </div>  
   <br><br>
-<% end %>
+<% end %> <!-- END OF BOARD -->
 
 

@@ -17,7 +17,7 @@
           <div class="card-body">
             <h4 class="card-title"><%= trip.trip_title %></h4>
             <% if trip.start_date && trip.end_date %>
-              <p class="card-text"><%= trip.start_date.strftime("%B %d, %Y") %> - <%= trip.end_date.strftime("%B %d, %Y")  %></p>
+              <p class="card-text"><%= trip.start_date.strftime("%B %d, %Y") %> - <%= trip.end_date.strftime("%B %d, %Y") %></p>
             <% else %>
               <% nil %>
             <% end %>
@@ -34,7 +34,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel">Add Trip</h4>
-          <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <%= form_tag "/trips", method: :post do  %>
           <div class="modal-body">
