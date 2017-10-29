@@ -5,6 +5,13 @@ class Trip < ApplicationRecord
   has_many :transportations
   has_many :lodgings
 
+  # geocoded_by :address
+  # after_validation :geocode
+
+  # def address
+  #   location
+  # end
+
   validate :start_date_cannot_be_in_the_past, :end_date_cannot_be_in_the_past
 
   def start_date_cannot_be_in_the_past

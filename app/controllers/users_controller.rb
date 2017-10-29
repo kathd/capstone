@@ -1,16 +1,12 @@
 class UsersController < ApplicationController
 
-  def show
-    user = current_user
-  end
-
-
   def create
     user = User.new(
       username: params[:username],
       email: params[:email],
       password: params[:password],
-      password_confirmation: params[:password_confirmation]
+      password_confirmation: params[:password_confirmation],
+      avatar: params[:avatar]
     )
     
     if user.save
@@ -23,16 +19,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    
+  end
+
   def update
-    user = current_user
-    user.update(
+    @user = current_user
+    @user.update(
       username: params[:username],
       email: params[:email],
       password: params[:password],
       password_confirmation: params[:password_confirmation],
       first_name: params[:first_name],
       last_name: params[:last_name],
-      bio: params[:bio]
+      bio: params[:bio],
+      avatar: params[:avatar]
     )
     
     # if user.save

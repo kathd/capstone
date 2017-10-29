@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root to: "pages#index"
 
   #signup
+  
   post "/users" => "users#create"
+  get "/users/:user_id/edit" => "users#edit"
   patch "/users/:user_id" => "users#update"
   delete "/users/:user_id" => "users#destroy"
 

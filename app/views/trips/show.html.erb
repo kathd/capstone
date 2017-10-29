@@ -6,13 +6,18 @@
   <% nil %>
 <% end %>
 
-<%= button_to "Delete", "/trips/#{@trip.id}", method: :delete, data: { confirm: 'Are you sure?' } %> 
+<!-- TRIP OPTIONS: EDIT / DELETE -->
+<div class="dropdown">
+  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="tripDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Options
+  </button>
+  <div class="dropdown-menu" aria-labelledby="tripDropdownMenu">
+    <button class="dropdown-item" type="button" data-toggle="modal" data-target="#editTripModal">Edit Trip</button>
+    <div class="dropdown-divider"></div>
+    <%= button_to "Delete", "/trips/#{@trip.id}", method: :delete, class: "dropdown-item", data: { confirm: 'Are you sure?' } %>
+  </div>
+</div>
 
-<!-- EDIT TRIP MODAL ** THIS WORKS ** -->
-<!-- MODAL TRIGGER -->
-  <a href="/trips/#{@trip.id}/edit" class="btn btn-primary" 
-    data-toggle="modal"
-    data-target="#editTripModal">Edit Trip</a>
 
 <!-- ADD BOARD MODAL ** THIS WORKS ** -->
   <!-- MODAL TRIGGER -->
@@ -32,6 +37,7 @@
     data-toggle="modal"
     data-target="#addTransportationModal">Add Transportation</button>
   
+
 <!-- EDIT TRIP MODAL CONTENT --> 
   <div class="modal fade" id="editTripModal" tabindex="-1" role="dialog" aria-labelledby="editTripModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -78,39 +84,21 @@
     </div>
   </div>
 
-<!-- ADD LODGING MODAL CONTENT -->
+<!-- ADD LODGING MODAL CONTENT ** TODO: DOES NOT WORK **-->
   <div class="modal fade" id="addLodgingModal" tabindex="-1" role="dialog" aria-labelledby="addLodgingModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">Add Board</h4>
+          <h4 class="modal-title" id="myModalLabel">Add Lodging</h4>
           <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
         </div>
         <%= form_tag "/trips/#{@trip.id}/lodgings", method: :post do  %>
           <div class="modal-body">
-            <div>
-              Name:<br>
-              <input type="text" name="lodging_name"><br>
-            </div>
-            <div>
-              Check In:<br>
-              <input type="date" name="checkin_date"><br>
-            </div>
-            <div>
-              Check Out:<br>
-              <input type="date" name="checkout_date"><br>
-            </div>
-            <div>
-              Notes:<br>
-              <textarea name="notes"></textarea>
-            </div>
-            <div>
-              Price: <input type="number" min="0.00" max="999999.99" step="any" name="price">
-            </div>
+            <%= render partial: "lodging_form" %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary">Add Board</button>
+            <button type="submit" class="btn btn-primary">Add Lodging</button>
           </div>
         <% end %>
       </div>
@@ -123,42 +111,16 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">Add Board</h4>
+          <h4 class="modal-title" id="myModalLabel">Add Transportation</h4>
           <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
         </div>
         <%= form_tag "/trips/#{@trip.id}/transportations", method: :post do  %>
           <div class="modal-body">
-            <div>
-              Name:<br>
-              <input type="text" name="transpo_name"><br>
-            </div>
-            <div>
-              Depart Date:
-              <input type="date" name="depart_date">
-            </div>
-            <div>
-              Depart Time:
-              <input type="time" name="depart_time"><br>
-            </div>
-            <div>
-              Arrival Date:
-              <input type="date" name="arrive_date">
-            </div>
-            <div>
-              Arrival Time:
-              <input type="time" name="arrive_time"><br>
-            </div>
-            <div>
-              Notes:<br>
-              <textarea name="notes"></textarea><br>
-            </div>
-            <div>
-              Price: <input type="number" min="0.00" max="999999.99" step="any" name="price">
-            </div>
+            <%= render partial: "transportation_form" %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary">Add Board</button>
+            <button type="submit" class="btn btn-primary">Add Transportation</button>
           </div>
         <% end %>
       </div>
@@ -166,7 +128,24 @@
   </div>
 
 <!-- LODGING LIST -->
+<% @trip.lodgings.each do |lodging| %>
+  
+  <% if lodging.checkin_date && lodging.checkout_date %>
+  <div>
+    <h5><%= lodging.lodging_name %> | <%= lodging.checkin_date.strftime("%B %d, %Y") %> - <%= lodging.checkout_date.strftime("%B %d, %Y") %></h5>
+  </div>
+  <% else %>
+    <h5><%= lodging.lodging_name %></h5>
+  <% end %>
+<% end %>
 
+
+<!-- TRANSPORTATION LIST -->
+<% @trip.transportations.each do |transportation| %>
+  <div>
+    <h5><%= transportation.transpo_name %></h5>
+  </div>
+<% end %>
 
 
 <!-- BOARDS LIST - EACH -->
@@ -186,7 +165,6 @@
         <button class="dropdown-item" type="button" data-toggle="modal" data-target="#addItem<%=board.id%>">Add Item</button>
         <div class="dropdown-divider"></div>
         <button class="dropdown-item" type="button">Archive</button> <!-- TODO: Archive Board -->
-        <button href="/trips/#{@trip.id}/boards/#{board.id}" class="dropdown-item" type="button" data-method="delete" >Delete</button> <!-- TODO: Delete Board -->
         <%= button_to "Delete", "/trips/#{@trip.id}/boards/#{board.id}", method: :delete, class: "dropdown-item", data: { confirm: 'Are you sure?' } %> 
       </div>
     </div>
