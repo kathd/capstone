@@ -5,6 +5,9 @@ class Trip < ApplicationRecord
   has_many :transportations
   has_many :lodgings
 
+  validates :trip_title, presence: true
+
+
   # geocoded_by :address
   # after_validation :geocode
 

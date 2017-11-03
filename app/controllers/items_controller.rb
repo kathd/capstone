@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
 
+  before_action :authenticate_user!
+  
   def show
     app_item # from ApplicationController
   end
@@ -15,8 +17,6 @@ class ItemsController < ApplicationController
       item_type: params[:item_type],
       description: params[:description],
       time: params[:time],
-      longitude: params[:longitude],
-      latitude: params[:latitude],
       price: params[:price]
       )
     redirect_to "/trips/#{@trip.id}"
@@ -29,8 +29,6 @@ class ItemsController < ApplicationController
       item_type: params[:item_type],
       notes: params[:notes],
       time: params[:time],
-      longitude: params[:longitude],
-      latitude: params[:latitude],
       image_url: params[:image_url],
       price: params[:price]
       )

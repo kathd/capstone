@@ -14,15 +14,15 @@
 
 <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/trips">Taravel</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
 
       <% if current_user %>
+        <a class="navbar-brand" href="/trips">Taravel</a>
         <li class="nav-item">
           <a class="nav-link">Hey, <%= current_user.username %></a>
         </li>
@@ -44,6 +44,7 @@
         </form> -->
 
       <% else %>
+        <a class="navbar-brand" href="/">Taravel</a>
         <li class="nav-item">
           <a class="nav-link" href="/signup" data-toggle="modal" data-target="#signupModal">Sign Up</a>
         </li>
@@ -58,7 +59,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
-                <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               </div>
                 <%= form_tag '/users', method: :post do  %>
                   <div class="modal-body">
@@ -95,7 +96,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">Log In</h4>
-                <button class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               </div>
                 <%= form_tag "/login", method: :post do %>
                   <div class="modal-body">

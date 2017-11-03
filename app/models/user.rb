@@ -1,8 +1,14 @@
 class User < ApplicationRecord
   has_secure_password
-  # association
   has_many :trips
-  # validations
+  
+  validates :username, :email, :password, presence: true
+  validates :username, :email, uniqueness: true
+  validates :username, length: {minimum: 3}
+  validates :password, length: {minimum: 5}
+  validates :bio, length: {maximum: 140}
+
+
   
   has_attached_file :avatar,
                     :styles => { :medium => "150x150>", :thumb => "44x44#" },

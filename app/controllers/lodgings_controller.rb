@@ -12,8 +12,6 @@ class LodgingsController < ApplicationController
     @lodging = Lodging.create(
       trip_id: @trip.id,
       lodging_name: params[:lodging_name],
-      longitude: params[:longitude],
-      latitude: params[:latitude],
       checkin_date: params[:checkin_date],
       checkout_date: params[:checkout_date],
       notes: params[:notes],

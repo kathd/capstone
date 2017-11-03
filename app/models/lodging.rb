@@ -1,6 +1,9 @@
 class Lodging < ApplicationRecord
   belongs_to :trip
 
+  validates :lodging_name, presence: true
+  validates :price, numericality: true
+  validates :notes, length: {maximum: 300}
   validate :checkin_date_cannot_be_in_the_past, :checkout_date_cannot_be_in_the_past
 
   def checkin_date_cannot_be_in_the_past
