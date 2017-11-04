@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       redirect_to '/trips'
     else
       flash[:warning] = 'Invalid email or password!'
-      redirect_to '/login'
+      redirect_to '/'
     end
   end
 

@@ -154,7 +154,8 @@
           </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-primary">Edit Lodging</button>
+              <button type="submit" class="btn btn-primary">Edit</button> <!-- TODO: MAKE EDIT WORK -->
+              <%= button_to "Delete", "/trips/#{@trip.id}/lodgings/#{lodging.id}", method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
             </div>
         </div>
       </div>
@@ -168,9 +169,34 @@
 <!-- TRANSPORTATION LIST - EACH -->
 <div id="transpo-list">
   <% @trip.transportations.each do |transportation| %>
-    <div id="transpo-each" class="btn btn-link" data-toggle="modal" data-target="">
+    <div id="transpo-each" class="btn btn-link" data-toggle="modal" data-target="#showTranspo<%=transportation.id%>">
       <p><%= transportation.transpo_name %></p>
     </div>
+</div>
+
+<!-- SHOW EACH TRANSPORTATION MODAL CONTENT -->
+    <div class="modal fade" id="showTranspo<%=transportation.id%>" tabindex="-1" role="dialog" aria-labelledby="showTranspo<%=transportation.id%>" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel"><%= transportation.transpo_type %> | <%= transportation.transpo_name %></h4>
+            <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div>
+              <p>Departure</p><br>
+              <p><%= transportation.depart_date %> | <%= transportation.depart_time %></p>
+            </div>
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Edit</button> <!-- TODO: MAKE EDIT WORK -->
+              <%= button_to "Delete", "/trips/#{@trip.id}/transportations/#{transportation.id}", method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
+            </div>
+        </div>
+      </div>
+    </div>
+
   <% end %>
 </div>
 
@@ -261,7 +287,9 @@
               </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  <button type="submit" class="btn btn-primary">Add Item</button>
+                  <button type="submit" class="btn btn-primary">Edit</button> <!-- TODO: MAKE EDIT WORK -->
+                  <button type="submit" class="btn btn-primary">Move</button> <!-- TODO: MAKE MOVE WORK -->
+                  <%= button_to "Delete", "/trips/#{@trip.id}/boards/#{board.id}/items/#{item.id}", method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
                 </div>
             </div>
           </div>

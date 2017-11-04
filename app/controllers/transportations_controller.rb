@@ -2,6 +2,11 @@ class TransportationsController < ApplicationController
 
   before_action :authenticate_user!
 
+  def show
+    app_trip
+    @transportation = @trip.transportations.find(params[:transportation_id])
+  end
+
   def create
     app_trip
     @transportation = Transportation.create(
@@ -14,6 +19,14 @@ class TransportationsController < ApplicationController
       price: params[:price]
       )
     redirect_to "/trips/#{@trip.id}"  
+  end
+
+  def destroy
+    app_trip # from ApplicationController
+    @transportation = @trip.transportations.find(params[:transportation_id])
+    @transportation.destroy
+    flash[:warning] = "Transportation Deleted"
+    redirect_to "/trips/#{@trip.id}"
   end
 
 end

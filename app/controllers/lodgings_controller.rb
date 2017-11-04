@@ -20,4 +20,12 @@ class LodgingsController < ApplicationController
     redirect_to "/trips/#{@trip.id}"
   end
 
+  def destroy
+    app_trip # from ApplicationController
+    @lodging = @trip.lodgings.find(params[:lodging_id])
+    @lodging.destroy
+    flash[:warning] = "Lodging Deleted"
+    redirect_to "/trips/#{@trip.id}"
+  end
+
 end
