@@ -46,10 +46,10 @@
       <% else %>
         <a class="navbar-brand" href="/">Taravel</a>
         <li class="nav-item">
-          <a class="nav-link" href="/signup" data-toggle="modal" data-target="#signupModal">Sign Up</a>
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/login" data-toggle="modal" data-target="#loginModal">Login</a>
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
         </li>
         </ul>
 
@@ -98,7 +98,7 @@
                 <h4 class="modal-title" id="myModalLabel">Log In</h4>
                 <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               </div>
-                <%= form_tag "/login", method: :post do %>
+                <%= form_tag "/trips", method: :post do %>
                   <div class="modal-body">
                     <div>
                       <label>Email</label>
