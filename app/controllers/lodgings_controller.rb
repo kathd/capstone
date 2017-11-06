@@ -7,6 +7,11 @@ class LodgingsController < ApplicationController
     @lodging = @trip.lodgings.find(params[:lodging_id])
   end
 
+  def new
+    app_trip
+    @lodging = Lodging.new
+  end
+
   def create
     app_trip
     @lodging = Lodging.create(
@@ -17,6 +22,20 @@ class LodgingsController < ApplicationController
       notes: params[:notes],
       price: params[:price]
       )
+    redirect_to "/trips/#{@trip.id}"
+  end
+
+  def update
+    app_trip # from ApplicationController
+    @lodging = @trip.lodgings.find(params[:lodging_id])
+    @transportation.update(
+      lodging_name: params[:lodging_name],
+      checkin_date: params[:checkin_date],
+      checkout_date: params[:checkout_date],
+      notes: params[:notes],
+      price: params[:price]
+      )
+    flash[:success] = "Lodging Updated"
     redirect_to "/trips/#{@trip.id}"
   end
 

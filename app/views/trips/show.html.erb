@@ -148,18 +148,60 @@
           </div>
           <div class="modal-body">
             <div>
-              <p>Checkin: <%= lodging.checkin_date %></p>
-              <p>Checkout: <%= lodging.checkin_date %></p>
+              <p>Check In: <%= lodging.checkin_date %></p>
+              <p>Check Out: <%= lodging.checkout_date %></p>
+
             </div>
           </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-primary">Edit</button> <!-- TODO: MAKE EDIT WORK -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editLodging<%=lodging.id%>">Edit</button>
               <%= button_to "Delete", "/trips/#{@trip.id}/lodgings/#{lodging.id}", method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
             </div>
         </div>
       </div>
     </div>
+
+<!-- EDIT LODGING MODAL CONTENT -->
+
+  <div class="modal fade" id="editLodging<%=lodging.id%>" tabindex="-1" role="dialog" aria-labelledby="editLodging<%=lodging.id%>" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Edit Lodging</h4>
+          <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <%= form_tag "/trips/#{@trip.id}/lodgings/#{lodging.id}", method: :patch do  %>
+          <div class="modal-body">
+            <div>
+              <label for="lodging_name">Lodging Name</label>
+              <input type="text" class="form-control" id="lodging_name" name="lodging_name" placeholder="Airbnb, Hilton Hotel, etc." value="<%= lodging.lodging_name %>">
+            </div>
+            <div>
+              <label for="checkin_date">From</label>
+              <input type="date" class="form-control" id="checkin_date" name="checkin_date" value="<%= lodging.checkin_date %>">
+            </div>
+            <div>
+              <label for="checkout_date">To</label>
+              <input type="date" class="form-control" id="checkout_date" name="checkout_date" value="<%= lodging.checkout_date %>">
+            </div>
+            <div>
+              <label for="notes">Notes</label>
+              <textarea class="form-control" id="notes" name="notes" placeholder="Confirmation No., Reminders, etc." maxlength="500" value="<%= lodging.notes %>"></textarea>
+            </div>
+            <div>
+              <label for="price">Price</label>
+              <input ype="number" min="0.00" max="999999.99" step="any" class="form-control" id="price" name="price" value="<%= lodging.price %>">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
   <% end %>
 </div>
@@ -172,30 +214,88 @@
     <div id="transpo-each" class="btn btn-link" data-toggle="modal" data-target="#showTranspo<%=transportation.id%>">
       <p><%= transportation.transpo_name %></p>
     </div>
-</div>
 
 <!-- SHOW EACH TRANSPORTATION MODAL CONTENT -->
     <div class="modal fade" id="showTranspo<%=transportation.id%>" tabindex="-1" role="dialog" aria-labelledby="showTranspo<%=transportation.id%>" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel"><%= transportation.transpo_type %> | <%= transportation.transpo_name %></h4>
+            <h4 class="modal-title" id="myModalLabel"><%= transportation.transpo_type %></h4>
             <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           </div>
           <div class="modal-body">
             <div>
-              <p>Departure</p><br>
-              <p><%= transportation.depart_date %> | <%= transportation.depart_time %></p>
+              <h5><%= transportation.transpo_name %></h5>
+              <p>Departure:</p><br>
+              <p><%= transportation.depart_date %> <%= transportation.depart_time %></p><br>
+              <p>Notes:</p><br>
+              <p><%= transportation.notes %></p><br>
+              <p>Price:</p><br>
+              <p><%= transportation.price %></p><br>
             </div>
           </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-primary">Edit</button> <!-- TODO: MAKE EDIT WORK -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editTranspo<%=transportation.id%>">Edit</button>
               <%= button_to "Delete", "/trips/#{@trip.id}/transportations/#{transportation.id}", method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
             </div>
         </div>
       </div>
     </div>
+
+<!-- EDIT TRANSPORTATION MODAL CONTENT -->
+
+  <div class="modal fade" id="editTranspo<%=transportation.id%>" tabindex="-1" role="dialog" aria-labelledby="editTranspo<%=transportation.id%>" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Edit Transportation</h4>
+          <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <%= form_tag "/trips/#{@trip.id}/transportations/#{transportation.id}", method: :patch do  %>
+          <div class="modal-body">
+            <div>
+              <select id="transpo_type" class="custom-select" name="transpo_type" value="<%= transportation.transpo_type %>">
+                <option selected>Transportation Type</option>
+                <option value="Flight">Flight</option>
+                <option value="Car Rental">Car Rental</option>
+                <option value="Rail">Rail</option>
+                <option value="Ground Transportation">Ground Transportation</option>
+                <option value="Ferry">Ferry</option>
+                <option value="Cruise">Cruise</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="transpo_name">Transportation Name</label>
+              <input type="text" class="form-control" id="transpo_name" name="transpo_name" placeholder="Airline, Busline, etc." value="<%= transportation.transpo_name %>">
+            </div>
+            <div>
+              <label for="depart_date">Departure Date</label>
+              <input type="date" class="form-control" id="depart_date" name="depart_date" value="<%= transportation.depart_date %>">
+            </div>
+            <div>
+              <label for="depart_time">Departure Time</label>
+              <input type="time" class="form-control" id="depart_time" name="depart_time" value="<%= transportation.depart_time %>">
+            </div>
+            <div>
+              <label for="notes">Notes</label>
+              <textarea class="form-control" id="notes" name="notes" placeholder="Confirmation No., Reminders, etc." maxlength="500" value="<%= transportation.notes %>"></textarea>
+            </div>
+            <div>
+              <label for="price">Price</label>
+              <input ype="number" min="0.00" max="999999.99" step="any" class="form-control" id="price" name="price" value="<%= transportation.price %>">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
 
   <% end %>
 </div>
@@ -232,7 +332,11 @@
             </div>
             <%= form_tag "/trips/#{@trip.id}/boards/#{board.id}", method: :patch do  %>
               <div class="modal-body">
-                <%= render partial: "board_form" %> <!-- TODO: show values-->
+                <div>
+                  <label for="board_title">Board Title</label>
+                  <input type="text" class="form-control" id="board_title" name="board_title" placeholder="First Day in NYC, Food List, Etc." value="<%= board.board_title %>">
+                </div>
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -287,10 +391,59 @@
               </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  <button type="submit" class="btn btn-primary">Edit</button> <!-- TODO: MAKE EDIT WORK -->
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editItem<%=item.id%>">Edit</button>
                   <button type="submit" class="btn btn-primary">Move</button> <!-- TODO: MAKE MOVE WORK -->
                   <%= button_to "Delete", "/trips/#{@trip.id}/boards/#{board.id}/items/#{item.id}", method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
                 </div>
+            </div>
+          </div>
+        </div>
+
+
+<!-- EDIT ITEM MODAL CONTENT -->
+
+        <div class="modal fade" id="editItem<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="editItem<%=item.id%>" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Edit Item</h4>
+                <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              </div>
+              <%= form_tag "/trips/#{@trip.id}/boards/#{board.id}/items/#{item.id}", method: :patch do  %>
+                <div class="modal-body">
+                  <div>
+                    <div class="form-check form-check-inline" value="<%= item.item_type %>">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="item_type" id="inlineRadio1" value="Food / Drink"> Food / Drink
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline" value="<%= item.item_type %>">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="item_type" id="inlineRadio2" value="Activity"> Activity
+                      </label>
+                    </div>
+
+                    <div>
+                      Description:<br>
+                      <textarea class="form-control" name="description" maxlength="500" value="<%= item.description %>"></textarea>
+                    </div>
+                    
+                    <div>
+                      <label for="time">Time</label>
+                      <input type="time" class="form-control" id="time" name="time" value="<%= item.time %>">
+                    </div>
+                    <div>
+                      <label for="price">Price</label>
+                      <input type="number" min="0.00" max="999999.99" step="any" class="form-control" id="price" name="price" placeholder="$" value="<%= item.price %>">
+                    </div>
+
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>

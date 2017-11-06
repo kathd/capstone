@@ -1,27 +1,19 @@
 <div>
-  <select id="transpo_type" class="custom-select">
+  <select id="transpo_type" class="custom-select" name="transpo_type">
     <option selected>Transportation Type</option>
-    <option name="transpo_type" value="Flight">Flight</option>
-    <option name="transpo_type" value="Car Rental">Car Rental</option>
-    <option name="transpo_type" value="Rail">Rail</option>
-    <option name="transpo_type" value="Ground Transportation">Ground Transportation</option>
-    <option name="transpo_type" value="Ferry">Ferry</option>
-    <option name="transpo_type" value="Cruise">Cruise</option>
-    <option name="transpo_type" value="Other">Other</option>
+    <option value="Flight">Flight</option>
+    <option value="Car Rental">Car Rental</option>
+    <option value="Rail">Rail</option>
+    <option value="Ground Transportation">Ground Transportation</option>
+    <option value="Ferry">Ferry</option>
+    <option value="Cruise">Cruise</option>
+    <option value="Other">Other</option>
   </select>
 </div>
 <div>
   <label for="transpo_name">Transportation Name</label>
   <input type="text" class="form-control" id="transpo_name" name="transpo_name" placeholder="Airline, Busline, etc.">
 </div>
-<!-- <div>
-  <label for="traveling_from">Traveling From</label>
-  <input type="text" class="form-control" id="traveling_from" name="traveling_from" placeholder="SFO, SF Caltrain Station, etc.">
-</div>
-<div>
-  <label for="traveling_to">Traveling To</label>
-  <input type="text" class="form-control" id="traveling_to" name="traveling_to" placeholder="JFK, Palo Alto Station, etc.">
-</div> -->
 <div>
   <label for="depart_date">Departure Date</label>
   <input type="date" class="form-control" id="depart_date" name="depart_date">
@@ -30,19 +22,13 @@
   <label for="depart_time">Departure Time</label>
   <input type="time" class="form-control" id="depart_time" name="depart_time">
 </div>
-<!-- <div>
-  <label for="arrive_date">Arrival Date</label>
-  <input type="date" class="form-control" id="checkout_date" name="checkout_date">
-</div> -->
-<!-- <div>
-  <label for="arrive_time">Arrival Time</label>
-  <input type="time" class="form-control" id="arrive_time" name="arrive_time">
-</div> -->
 <div>
   <label for="notes">Notes</label>
-  <textarea class="form-control" id="notes" name="notes" placeholder="Confirmation No., Reminders, etc."></textarea>
+  <textarea class="form-control" id="notes" name="notes" maxlength="500" placeholder="Confirmation No., Reminders, etc."></textarea>
 </div>
 <div>
   <label for="price">Price</label>
   <input ype="number" min="0.00" max="999999.99" step="any" class="form-control" id="price" name="price">
 </div>
+
+<!-- APPLIED ONLY TO NEW/CREATE FORMS, NOT EDIT/UPDATE-->

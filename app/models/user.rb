@@ -2,11 +2,11 @@ class User < ApplicationRecord
   has_secure_password
   has_many :trips
   
-  validates :username, :email, :password, presence: true
-  validates :username, :email, uniqueness: true
-  validates :username, length: {minimum: 3}
-  validates :password, length: {minimum: 5}
-  validates :bio, length: {maximum: 140}
+  # validates :username, :email, :password, presence: true
+  # validates :username, :email, uniqueness: true
+  # validates :username, length: {minimum: 3}
+  # validates :password, length: {minimum: 5}
+  # validates :bio, length: {maximum: 140}
 
 
   

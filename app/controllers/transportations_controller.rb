@@ -21,6 +21,21 @@ class TransportationsController < ApplicationController
     redirect_to "/trips/#{@trip.id}"  
   end
 
+  def update
+    app_trip # from ApplicationController
+    @transportation = @trip.transportations.find(params[:transportation_id])
+    @transportation.update(
+      transpo_type: params[:transpo_type],
+      transpo_name: params[:transpo_name],
+      depart_date: params[:depart_date],
+      depart_time: params[:depart_time],
+      notes: params[:notes],
+      price: params[:price]
+      )
+    flash[:success] = "Transportation Updated"
+    redirect_to "/trips/#{@trip.id}"
+  end
+
   def destroy
     app_trip # from ApplicationController
     @transportation = @trip.transportations.find(params[:transportation_id])
