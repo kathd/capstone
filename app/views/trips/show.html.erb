@@ -392,7 +392,22 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editItem<%=item.id%>">Edit</button>
-                  <button type="submit" class="btn btn-primary">Move</button> <!-- TODO: MAKE MOVE WORK -->
+                  <!-- MOVE BUTTON -->
+                  <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Move
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                      <% @trip.boards.each do |board|%>
+                        <% if item.board_id != board.id %>
+                          <%= form_tag "/trips/#{@trip.id}/boards/#{board.id}/items/#{item.id}", method: :patch do  %>
+                            <button class="dropdown-item" name="board_id" value="<%= board.id %>"><%= board.board_title %></button>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                  <!-- END OF MOVE - TODO: MAKE MOVE WORK -->
                   <%= button_to "Delete", "/trips/#{@trip.id}/boards/#{board.id}/items/#{item.id}", method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
                 </div>
             </div>
@@ -414,8 +429,8 @@
                   <div>
                     <div class="form-check form-check-inline" value="<%= item.item_type %>">
                       <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="item_type" id="inlineRadio1" value="Food / Drink"> Food / Drink
-                      </label>
+                        <input class="form-check-input" type="radio" name="item_type" id="inlineRadio1" value="Food / Drink" > Food / Drink
+                      </label> <!-- TODO: conditional checked="checked" -->
                     </div>
                     <div class="form-check form-check-inline" value="<%= item.item_type %>">
                       <label class="form-check-label">
@@ -425,7 +440,7 @@
 
                     <div>
                       Description:<br>
-                      <textarea class="form-control" name="description" maxlength="500" value="<%= item.description %>"></textarea>
+                      <textarea class="form-control" name="description" maxlength="500"><%= item.description %></textarea>
                     </div>
                     
                     <div>

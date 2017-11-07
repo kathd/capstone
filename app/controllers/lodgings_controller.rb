@@ -2,6 +2,11 @@ class LodgingsController < ApplicationController
 
   before_action :authenticate_user!
 
+  def index
+    app_trip
+    @lodgings = @trip.lodgings.order(:checkin_date)
+  end
+
   def show
     app_trip
     @lodging = @trip.lodgings.find(params[:lodging_id])
@@ -28,7 +33,7 @@ class LodgingsController < ApplicationController
   def update
     app_trip # from ApplicationController
     @lodging = @trip.lodgings.find(params[:lodging_id])
-    @transportation.update(
+    @lodging.update(
       lodging_name: params[:lodging_name],
       checkin_date: params[:checkin_date],
       checkout_date: params[:checkout_date],

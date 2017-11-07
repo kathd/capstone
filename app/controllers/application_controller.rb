@@ -12,15 +12,18 @@ class ApplicationController < ActionController::Base
   end
 
   def app_trip
+    p "APP_TRIP #{current_user.trips.find(params[:trip_id])}"
     @trip = current_user.trips.find(params[:trip_id])
   end
 
   def app_board
+    p "APP_BOARD #{app_trip.boards.find(params[:board_id])}"
     @board = app_trip.boards.find(params[:board_id])
     
   end
 
   def app_item
+    p "APP_ITEM #{app_board.items.find(params[:item_id])}"
     @item = app_board.items.find(params[:item_id])
   end
 
