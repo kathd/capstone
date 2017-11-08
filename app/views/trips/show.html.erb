@@ -332,7 +332,7 @@
         <button class="dropdown-item" type="button" data-toggle="modal" data-target="#editBoard<%=board.id%>">Edit Board</button>
         <button class="dropdown-item" type="button" data-toggle="modal" data-target="#addItem<%=board.id%>">Add Item</button>
         <div class="dropdown-divider"></div>
-        <button class="dropdown-item" type="button">Archive</button> <!-- TODO: Archive Board -->
+        <!-- <button class="dropdown-item" type="button">Archive</button> <!-- TODO: Archive Board --> -->
         <%= button_to "Delete", "/trips/#{@trip.id}/boards/#{board.id}", method: :delete, class: "dropdown-item", data: { confirm: 'Are you sure?' } %> 
       </div>
     </div>
@@ -446,7 +446,7 @@
                   <div>
                     <div class="form-check form-check-inline" value="<%= item.item_type %>">
                       <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="item_type" id="inlineRadio1" value="Food / Drink" > Food / Drink
+                        <input class="form-check-input" type="radio" name="item_type" id="inlineRadio1" value="Food / Drink"> Food / Drink
                       </label> <!-- TODO: conditional checked="checked" -->
                     </div>
                     <div class="form-check form-check-inline" value="<%= item.item_type %>">

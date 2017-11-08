@@ -26,12 +26,18 @@ class ItemsController < ApplicationController
     # conditional - for move and edit 
     app_trip
     @item = Item.find(params[:item_id])
-    @item.update(
-      item_type: params[:item_type],
-      description: params[:description],
-      time: params[:time],
-      price: params[:price]
-      )
+    if @item.board_id != params[:board_id]
+      @item.update(
+        board_id: params[:board_id]
+        )
+    else  
+      @item.update(
+        item_type: params[:item_type],
+        description: params[:description],
+        time: params[:time],
+        price: params[:price]
+        )
+    end
     flash[:success] = "Item Updated"
     redirect_to "/trips/#{@trip.id}"
   end
