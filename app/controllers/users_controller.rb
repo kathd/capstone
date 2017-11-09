@@ -5,8 +5,7 @@ class UsersController < ApplicationController
       username: params[:username],
       email: params[:email],
       password: params[:password],
-      password_confirmation: params[:password_confirmation],
-      avatar: params[:avatar]
+      password_confirmation: params[:password_confirmation]
     )
     
     if user.save

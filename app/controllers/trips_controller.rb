@@ -57,4 +57,10 @@ class TripsController < ApplicationController
     redirect_to "/trips"
   end
 
+  def countdown
+    @trip = current_user.trips.find_by(id: params[:id])
+    countdown = @trip.start_date - Date.today 
+    
+  end
+
 end
