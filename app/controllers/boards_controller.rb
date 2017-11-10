@@ -10,7 +10,8 @@ class BoardsController < ApplicationController
     app_trip # from ApplicationController
     @board = Board.create(
       trip_id: @trip.id,
-      board_title: params[:board_title]
+      board_title: params[:board_title],
+      category: params[:category]
       )
     flash[:success] = "Board Created"
     redirect_to "/trips/#{@trip.id}"
@@ -23,7 +24,8 @@ class BoardsController < ApplicationController
   def update
     app_board # from ApplicationController
     @board.update(
-      board_title: params[:board_title]
+      board_title: params[:board_title],
+      category: params[:category]
       )
     flash[:success] = "Board Updated"
     redirect_to "/trips/#{@trip.id}"
