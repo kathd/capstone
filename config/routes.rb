@@ -36,7 +36,6 @@ Rails.application.routes.draw do
   #items
   post "/trips/:trip_id/boards/:board_id/items" => "items#create"
   patch "/trips/:trip_id/boards/:board_id/items/:item_id" => "items#update"
-  # patch "/trips/:trip_id/boards/:board_id/items/:item_id" => "items#move"
   delete "/trips/:trip_id/boards/:board_id/items/:item_id" => "items#destroy"
 
 end

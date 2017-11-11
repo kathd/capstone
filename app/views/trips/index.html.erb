@@ -50,7 +50,18 @@
                         <h3 class="mrg-vertical-15">Add Trip</h3>
                         <%= form_tag "/trips", method: :post do  %>
                           <div class="modal-body">
-                            <%= render partial: "trip_form" %>
+                            <div class="form-group">
+                              <label for="trip_title">Trip Title</label>
+                              <input type="text" class="form-control" id="trip_title" name="trip_title" placeholder="New York, Destination Wedding, Etc.">
+                            </div>
+                            <div class="form-group">
+                              <label for="start_date">From</label>
+                              <input type="date" class="form-control" id="start_date" name="start_date">
+                            </div>
+                            <div class="form-group">
+                              <label for="end_date">To</label>
+                              <input type="date" class="form-control" id="end_date" name="end_date">
+                            </div>
                           </div>
                           <div class="text-right mrg-top-20">
                             <button type="button" class="btn btn-md btn-default border-radius-4" data-dismiss="modal">Cancel</button>

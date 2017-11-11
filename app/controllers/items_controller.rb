@@ -14,9 +14,8 @@ class ItemsController < ApplicationController
     app_board # from ApplicationController
     @item = Item.create(
       board_id: @board.id,
-      item_type: params[:item_type],
+      item_title: params[:item_title],
       description: params[:description],
-      time: params[:time],
       price: params[:price]
       )
     redirect_to "/trips/#{@trip.id}"
@@ -32,9 +31,8 @@ class ItemsController < ApplicationController
         )
     else  
       @item.update(
-        item_type: params[:item_type],
+        item_title: params[:item_title],
         description: params[:description],
-        time: params[:time],
         price: params[:price]
         )
     end
