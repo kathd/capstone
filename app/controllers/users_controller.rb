@@ -31,10 +31,10 @@ class UsersController < ApplicationController
       password_confirmation: params[:password_confirmation],
       first_name: params[:first_name],
       last_name: params[:last_name],
-      bio: params[:bio],
-      avatar: params[:avatar]
+      bio: params[:bio]
+      # avatar: params[:avatar]
     )
-    
+    flash[:success] = 'Account Updated!'
     # if user.save
     #   session[:user_id] = user.id
     #   flash[:success] = 'Successfully created account!'

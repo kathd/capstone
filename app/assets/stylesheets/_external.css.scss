@@ -1,5 +1,23 @@
 @import "bootstrap";
 
+#index-page {
+  margin: 50px;
+}
+
+#show-page {
+  margin: 50px;
+}
+
 #board-header, #board-options {
   display: inline-block;
+}
+
+#board-col {
+  width: 300px;
+  margin-right: 20px;
+  float: left;
+}
+
+#trash {
+  color:rgb(209, 91, 71);
 }

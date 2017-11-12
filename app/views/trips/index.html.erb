@@ -1,3 +1,4 @@
+<div id="index-page">
 <!-- ADD TRIP MODAL -->
   <!-- MODAL TRIGGER -->
   <button class="btn btn-md btn-theme"
@@ -15,7 +16,7 @@
         <div class="card" style="width: 35rem;">
           <div class="card-body">
             <h4 class="card-title"><%= trip.trip_title %></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Days Until This Trip</h6> <!-- TODO: COUNTDOWN -->
+            <h6 class="card-subtitle mb-2 text-muted"><%= (trip.start_date - Date.current).to_i %> Days To Go!</h6> <!-- TODO: COUNTDOWN -->
             <p class="card-text"><%= trip.start_date.strftime("%B %d, %Y") %> - <%= trip.end_date.strftime("%B %d, %Y") %></p>
             <a href="/trips/<%= trip.id %>" class="btn btn-sm btn-theme">View Trip</a>
           </div>
@@ -76,6 +77,7 @@
             </div>
         </div>
     </div>
+</div>
 
 
 

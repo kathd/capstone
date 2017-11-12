@@ -28,5 +28,17 @@ class Trip < ApplicationRecord
   end
 
 
+  # def countdown
+  #   raw_dates = [Date.current, start_date]
+
+  #   date_old, date_new =
+  #     raw_dates.map{|str| Date.parse str}.sort
+
+  #   date_new.downto date_old do |date|
+  #     puts date.strftime '%d-%m-%Y'
+  #   end
+  # end
+
+
   # accepts_nested_attributes_for :boards
 end
