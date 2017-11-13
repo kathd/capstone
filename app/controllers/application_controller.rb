@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def app_trip
-    p "APP_TRIP #{current_user.trips.find(params[:trip_id])}"
+    p "APP_TRIP #{current_user.trips.find(params[:trip_id])}" #for testing
     @trip = current_user.trips.find(params[:trip_id])
   end
 

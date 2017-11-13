@@ -8,16 +8,25 @@
   margin: 50px;
 }
 
-#board-header, #board-options {
-  display: inline-block;
+.card {
+  margin: 10px;
+}
+
+.panel {
+  border-color: #dcdcdc !important;
 }
 
 #board-col {
   width: 300px;
+  margin-top: 20px;
   margin-right: 20px;
   float: left;
 }
 
 #trash {
   color:rgb(209, 91, 71);
+}
+
+#item-each {
+  text-align: left;
 }

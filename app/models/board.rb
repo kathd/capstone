@@ -5,4 +5,5 @@ class Board < ApplicationRecord
   # validates :board_title, presence: true
 
   # accepts_nested_attributes_for :items
+
 end

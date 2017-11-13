@@ -13,10 +13,10 @@
       <!-- ADD TRIP LOCATION HERE -->
       <% if trip.start_date && trip.end_date %>
 
-        <div class="card" style="width: 35rem;">
+        <div class="card" style="width: 33rem;">
           <div class="card-body">
             <h4 class="card-title"><%= trip.trip_title %></h4>
-            <h6 class="card-subtitle mb-2 text-muted"><%= (trip.start_date - Date.current).to_i %> Days To Go!</h6> <!-- TODO: COUNTDOWN -->
+            <h6 class="card-subtitle mb-2 text-muted"><span class="badge"><%= (trip.start_date - Date.current).to_i %></span> Days To Go!</h6> <!-- TODO: COUNTDOWN -->
             <p class="card-text"><%= trip.start_date.strftime("%B %d, %Y") %> - <%= trip.end_date.strftime("%B %d, %Y") %></p>
             <a href="/trips/<%= trip.id %>" class="btn btn-sm btn-theme">View Trip</a>
           </div>

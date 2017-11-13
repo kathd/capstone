@@ -27,7 +27,7 @@ class TripsController < ApplicationController
       end_date: params[:end_date]
       )
     flash[:success] = "Trip Created"
-    redirect_to "/trips/#{@trip.id}"
+    redirect_to "/trips"
   end
 
   def edit
