@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
   def app_board
     p "APP_BOARD #{app_trip.boards.find(params[:board_id])}"
     @board = app_trip.boards.find(params[:board_id])
-    
   end
 
   def app_item

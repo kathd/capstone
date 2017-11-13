@@ -1,5 +1,9 @@
 @import "bootstrap";
 
+.navbar li {
+  margin-right: 10px;
+}
+
 #index-page {
   margin: 50px;
 }
@@ -16,8 +20,21 @@
   border-color: #dcdcdc !important;
 }
 
+#user-col {
+  width: 600px;
+  margin: 20px;
+  float: left;
+}
+
+.user-form {
+  margin: 20px;
+}
+
+
 #board-col {
   width: 300px;
+  height: 400px;
+  overflow-y: scroll;
   margin-top: 20px;
   margin-right: 20px;
   float: left;

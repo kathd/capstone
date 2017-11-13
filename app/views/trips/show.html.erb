@@ -107,8 +107,9 @@
 
 <!-- BOARDS LIST - EACH -->
 <div class="container-fluid">
-  <div class="row">
-      <% @trip.boards.each do |board| %>
+  <div class="row boards-div">
+      <% boards_sorted = @trip.boards.order(:created_at) %>
+      <% boards_sorted.each do |board| %>
       <!-- BOARD HEADER -->
         <div class="panel panel-theme" id="board-col">
           <h4 class="panel-heading"><%= board.board_title %></h4>
@@ -215,7 +216,8 @@
       <!-- ITEMS LIST -->
               <div class="panel-body">
                 <ul class="list-group">
-                  <% board.items.each do |item| %>
+                  <% items_sorted = board.items.order(:created_at) %>
+                  <% items_sorted.each do |item| %>
                     <li id="item-each" class="btn btn-link list-group-item" data-toggle="modal" data-target="#showItem<%=item.id%>"><%= item.item_title %></li>
 
           <!-- SHOW ITEM MODAL CONTENT -->

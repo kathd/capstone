@@ -1,10 +1,6 @@
 class ItemsController < ApplicationController
 
   before_action :authenticate_user!
-  
-  def show
-    app_item # from ApplicationController
-  end
 
   def new
     @item = Item.new
@@ -17,7 +13,8 @@ class ItemsController < ApplicationController
       item_title: params[:item_title],
       link: params[:link],
       description: params[:description],
-      price: params[:price]
+      price: params[:price],
+      created_at: params[:created_at]
       )
     redirect_to "/trips/#{@trip.id}"
   end
