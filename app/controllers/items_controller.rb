@@ -13,7 +13,6 @@ class ItemsController < ApplicationController
       item_title: params[:item_title],
       link: params[:link],
       description: params[:description],
-      price: params[:price],
       created_at: params[:created_at]
       )
     redirect_to "/trips/#{@trip.id}"
@@ -22,12 +21,11 @@ class ItemsController < ApplicationController
   def update
     app_trip
     @item = Item.find(params[:item_id])
-    if params[:item_title] or params[:description] or params[:price] or params[:link]
+    if params[:item_title] or params[:description] or params[:link]
       @item.update(
         item_title: params[:item_title],
         link: params[:link],
         description: params[:description],
-        price: params[:price]
         )
       flash[:success] = "Item Updated"
     elsif params[:board_id]
