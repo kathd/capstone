@@ -10,10 +10,8 @@ gem 'paperclip', '~> 5.0.0'
 gem 'faker'
 gem 'geocoder'
 gem 'bootstrap', '~> 4.0.0.beta'
-gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
+gem 'jquery-rails'
 # gem 'webpacker', '~> 3.0'
-
-# gem 'jquery‐rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
