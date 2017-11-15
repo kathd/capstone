@@ -1,0 +1,45 @@
+<div id="index-page">
+<a class="btn btn-sm btn-theme" href="/trips/<%= @trip.id %>">Back to Boards</a>
+  <section class="section-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2><%= @trip.trip_title %></h2>
+          <% if @trip.start_date && @trip.end_date %>
+            <p><span class="badge"><%= (@trip.start_date - Date.current).to_i %></span> Days To Go!</p>
+            <p><%= @trip.start_date.strftime("%B %d, %Y") %> - <%= @trip.end_date.strftime("%B %d, %Y") %></p>
+          <% else %>
+            <% nil %>
+          <% end %>
+          <div class="col-md-12">
+            <% @boards.each do |board|%>
+              <h4><%= board.board_title%> <span>- <%= board.category if board.category%></span></h4>
+              <div class="card padding-30 mrg-top-20">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Item Title</th>
+                        <th>Link</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% board.items.each do |item|%>
+                      <tr>
+                        <td><%= item.item_title %></td>
+                        <td><%= item.link %></td>
+                        <td><%= item.description %></td>
+                      </tr>
+                      <% end %> <!-- ITEM END -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            <% end %> <!-- BOARD END -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

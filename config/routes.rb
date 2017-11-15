@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   #trips
   resources :trips
 
+  #tables
+  get "/trips/:trip_id/tables" => "tables#index"
+
   #boards
   post "/trips/:trip_id/boards" => "boards#create"
   patch "/trips/:trip_id/boards/:board_id" => "boards#update"
