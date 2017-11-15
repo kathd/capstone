@@ -5,7 +5,8 @@ class UsersController < ApplicationController
       username: params[:username],
       email: params[:email],
       password: params[:password],
-      password_confirmation: params[:password_confirmation]
+      password_confirmation: params[:password_confirmation],
+      avatar: params[:avatar]
     )
     
     if user.save
@@ -13,7 +14,7 @@ class UsersController < ApplicationController
       flash[:success] = 'Successfully created account!'
       redirect_to '/trips'
     else
-      flash[:warning] = 'Invalid email or password!'
+      flash[:warning] = 'Something went wrong. Please try again.'
       redirect_to '/'
     end
   end
@@ -32,7 +33,6 @@ class UsersController < ApplicationController
       first_name: params[:first_name],
       last_name: params[:last_name],
       bio: params[:bio]
-      # avatar: params[:avatar]
     )
     flash[:success] = 'Account Updated!'
     # if user.save

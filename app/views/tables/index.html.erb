@@ -1,16 +1,17 @@
 <div id="index-page">
 <a class="btn btn-sm btn-theme" href="/trips/<%= @trip.id %>">Back to Boards</a>
-  <section class="section-2">
+  <section class="section-5">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2><%= @trip.trip_title %></h2>
+          <center><h2><%= @trip.trip_title %></h2>
           <% if @trip.start_date && @trip.end_date %>
             <p><span class="badge"><%= (@trip.start_date - Date.current).to_i %></span> Days To Go!</p>
             <p><%= @trip.start_date.strftime("%B %d, %Y") %> - <%= @trip.end_date.strftime("%B %d, %Y") %></p>
           <% else %>
             <% nil %>
           <% end %>
+          </center>
           <div class="col-md-12">
             <% boards_sorted = @boards.order(:created_at)%>
             <% boards_sorted.each do |board|%>
@@ -30,7 +31,7 @@
                       <% items_sorted.each do |item|%>
                       <tr>
                         <td><%= item.item_title %></td>
-                        <td><%= item.link %></td>
+                        <td><a href="<%= item.link %>"><%= item.link %></a></td>
                         <td><%= item.description %></td>
                       </tr>
                       <% end %> <!-- ITEM END -->

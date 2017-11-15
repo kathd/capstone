@@ -1,4 +1,10 @@
+<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+
 <div id="show-page">
+<a class="btn btn-sm btn-theme" href="/trips">Back to Trips</a>
 <!-- TRIP INFO -->
 <div id="trip-info">
   <h3><%= @trip.trip_title %></a></h3>
@@ -109,12 +115,12 @@
 
 <!-- BOARDS LIST - EACH -->
 <div class="container-fluid">
-  <div class="row boards-div">
-      <% boards_sorted = @trip.boards.order(:created_at) %>
+  <div class="row boards-div sortable">
+      <% boards_sorted = @trip.boards %>
       <% boards_sorted.each do |board| %>
       <!-- BOARD HEADER -->
         <div class="panel panel-theme" id="board-col">
-          <h4 class="panel-heading"><%= board.board_title %></h4>
+          <h4 class="panel-heading"><%= board.board_title %> <span>- <%= board.category if board.category%></span></h4>
       <!-- BOARD OPTIONS -->
             <div id="board-options">
               <button class="btn btn-sm"
@@ -213,10 +219,10 @@
 
       <!-- ITEMS LIST -->
               <div class="panel-body">
-                <ul id="sortable" class="list-group">
-                  <% items_sorted = board.items.order(:created_at) %>
+                <ul class="sortable list-group">
+                  <% items_sorted = board.items %>
                   <% items_sorted.each do |item| %>
-                    <li id="item-each" class="btn btn-link list-group-item ui-state-default" data-toggle="modal" data-target="#showItem<%=item.id%>"><%= item.item_title %></li>
+                    <li id="item-each" class="btn btn-link list-group-item bg-light draggable" data-toggle="modal" data-target="#showItem<%=item.id%>"><%= item.item_title %></li>
 
           <!-- SHOW ITEM MODAL CONTENT -->
               <!-- TODO: LINKS SAVED SHOULD BE CLICKABLE -->
