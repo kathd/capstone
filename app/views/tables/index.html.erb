@@ -12,7 +12,8 @@
             <% nil %>
           <% end %>
           <div class="col-md-12">
-            <% @boards.each do |board|%>
+            <% boards_sorted = @boards.order(:created_at)%>
+            <% boards_sorted.each do |board|%>
               <h4><%= board.board_title%> <span>- <%= board.category if board.category%></span></h4>
               <div class="card padding-30 mrg-top-20">
                 <div class="table-responsive">
@@ -25,7 +26,8 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <% board.items.each do |item|%>
+                      <% items_sorted = board.items.order(:created_at) %>
+                      <% items_sorted.each do |item|%>
                       <tr>
                         <td><%= item.item_title %></td>
                         <td><%= item.link %></td>
