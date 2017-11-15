@@ -1,7 +1,7 @@
 <div id="show-page">
 <!-- TRIP INFO -->
 <div id="trip-info">
-  <h3><%= @trip.trip_title %></h3>
+  <h3><%= @trip.trip_title %></a></h3>
     <% if @trip.start_date && @trip.end_date %>
       <p><span class="badge"><%= (@trip.start_date - Date.current).to_i %></span> Days To Go!</p>
       <p><%= @trip.start_date.strftime("%B %d, %Y") %> - <%= @trip.end_date.strftime("%B %d, %Y") %></p>
@@ -11,6 +11,8 @@
 
   <!-- TRIP OPTIONS: EDIT / DELETE -->
     <div id="trip-options">
+      <a class="btn btn-sm"
+        href="/trips/<%= @trip.id %>/tables"><i class="ei ei-list"></i></a>
       <button class="btn btn-sm"
         data-toggle="modal" data-target="#editTripModal"><i class="ei ei-pencil"></i></button>
       <%= link_to raw("<i class=\"ei ei-garbage\"></i>"),
@@ -21,7 +23,7 @@
         data: { confirm: 'Are you sure you want to delete this trip?' } %>
     <!-- ADD BOARD MODAL -->
     <!-- MODAL TRIGGER -->
-      <button class="btn btn-md btn-theme" 
+      <button class="btn btn-sm btn-theme" 
         data-toggle="modal"
         data-target="#addBoardModal">Add Board</button>
     </div>
