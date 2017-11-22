@@ -89,7 +89,7 @@
                               <div class="form-group">
                                 <label for="category">Category</label>
                                   <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="category" name="category">
-                                    <option selected>Choose...</option>
+                                    <option selected> </option>
                                     <option name="category" value="Lodging">Lodging</option>
                                     <option name="category" value="Activity">Activity</option>
                                     <option name="category" value="Food / Drink">Food / Drink</option>
@@ -116,7 +116,7 @@
 <!-- BOARDS LIST - EACH -->
 <div class="container-fluid">
   <div class="row boards-div sortable">
-      <% boards_sorted = @trip.boards %>
+      <% boards_sorted = @trip.boards.order(:created_at) %>
       <% boards_sorted.each do |board| %>
       <!-- BOARD HEADER -->
         <div class="panel panel-theme" id="board-col">
@@ -220,7 +220,7 @@
       <!-- ITEMS LIST -->
               <div class="panel-body">
                 <ul class="sortable list-group">
-                  <% items_sorted = board.items %>
+                  <% items_sorted = board.items.order(:created_at) %>
                   <% items_sorted.each do |item| %>
                     <li id="item-each" class="btn btn-link list-group-item bg-light draggable" data-toggle="modal" data-target="#showItem<%=item.id%>"><%= item.item_title %></li>
 

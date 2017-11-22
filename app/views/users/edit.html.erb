@@ -4,15 +4,16 @@
       <h2>User Account</h2>
       <div class="row">
         <div class="col-md-4">
-          <div class="card padding-30 text-center border-radius-6">
-            
-            <%= form_tag "/users", multipart: true, method: :post do %>
-              <%= file_field_tag :avatar %>
-              <%= submit_tag "Save Avatar", class: "btn btn-sm btn-dark" %>
-            <% end %>
+          <div class="card">
+            <div class="padding-30 text-center border-radius-6">
+              <%= form_tag "/users", multipart: true, method: :post do %>
+                <%= file_field_tag :avatar %><br>
+                <%= submit_tag "Save Avatar", class: "btn btn-sm btn-theme" %>
+              <% end %>
             <!-- <label for="avatar">Upload Image</label>
             <input type="file" class="form-control-file" id="avatar" name="avatar">
             <button type="submit" class="btn btn-sm btn-dark border-radius-4">Add Avatar</button> -->
+            </div>
           </div>
         </div>
         <div class="col-md-8">
@@ -49,7 +50,7 @@
                 </div>
                 
                 <div class="form-group col-md-12">
-                  <input class="btn btn-md btn-dark" type="submit" value="Save Changes">
+                  <input class="btn btn-md btn-theme" type="submit" value="Save Changes">
                 </div>
             <% end %>
           </div>
